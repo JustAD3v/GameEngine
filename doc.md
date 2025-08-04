@@ -1,5 +1,3 @@
-Tu peux trouver la documentation **officielle et à jour** pour toutes les classes Qt utilisées avec Python (via PySide6) ici :
-
 ---
 
 ## ✅ Documentation PySide6 officielle
