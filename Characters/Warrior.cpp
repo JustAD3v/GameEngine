@@ -32,8 +32,8 @@ void Warrior::Update(float dt) {
 
     m_RigidBody->Update(dt);
     
-    // m_Transform->TranslateX(m_RigidBody->GetPosition().x);
-    m_Transform->Translate(m_RigidBody->GetPosition());
+    m_Transform->TranslateX(m_RigidBody->GetPosition().x);
+    // m_Transform->Translate(m_RigidBody->GetPosition());
     m_Animation->Update();
 }
 

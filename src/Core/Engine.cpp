@@ -40,14 +40,14 @@ void Engine::Init() {
         return;
     }
 
-    if(MapParser::GetInstance()->Load()) {
+    if(!MapParser::GetInstance()->Load("level1", "/Users/colin/Code/GameEngine/assets/maps/level1.tmj")) {
         std::cout << "Failed to load map" << std::endl;
     }
 
-    // m_LevelMap = MapParser::GetInstance()->GetMap("MAP");
+    m_LevelMap = MapParser::GetInstance()->GetMap("level1");
 
-    TextureManager::GetInstance()->Load("playerIdle", "/Users/colin/Code/Cprograms/GameEngine/assets/Idle32.png");
-    TextureManager::GetInstance()->Load("playerRun", "/Users/colin/Code/Cprograms/GameEngine/assets/Run32.png");
+    TextureManager::GetInstance()->Load("playerIdle", "/Users/colin/Code/GameEngine/assets/player/Idle32.png");
+    TextureManager::GetInstance()->Load("playerRun", "/Users/colin/Code/GameEngine/assets/player/Run32.png");
     
     player = new Warrior(new Properties("playerRun", SCREEN_WIDTH/2, 0, 32, 32));
 

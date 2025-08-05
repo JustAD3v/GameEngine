@@ -31,7 +31,7 @@ void TextureManager::DrawFrame(std::string id, float x, float y, float width, fl
 }
 
 void TextureManager::DrawTile(std::string id, float x, float y, float tileSize, int row, int frame, SDL_FlipMode flip) {
-    SDL_FRect srcRect = {frame*tileSize, (row-1)*tileSize, tileSize, tileSize};
+    SDL_FRect srcRect = {frame*tileSize, row*tileSize, tileSize, tileSize};
     SDL_FRect destRect = {x, y, tileSize, tileSize};
     SDL_RenderTextureRotated(Engine::GetInstance()->GetRenderer(), m_TextureMap[id], &srcRect, &destRect, 0, 0, flip);
 }

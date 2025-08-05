@@ -8,7 +8,7 @@ TileLayer::TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, 
     m_TileSize = tilesize;
 
     for (int i = 0; i < m_Tilesets.size(); i++) {
-        TextureManager::GetInstance()->Load(m_Tilesets[i].Name, "assets/maps" + m_Tilesets[i].Source);
+        TextureManager::GetInstance()->Load(m_Tilesets[i].Name, "assets/maps/" + m_Tilesets[i].Source);
     }
 }
 
@@ -21,17 +21,27 @@ void TileLayer::Render() {
                 continue;
             }
             else {
-                int tileSetIndex = tileID/1000 - 1; //tileID has this format : (tileSetID)(tileIDOnTileset), -1 to get back to index 0
-                int tileIDOnTileset = tileID - 1000*(tileSetIndex+1);
-                
+                int tileSetIndex = GetTilesetID(tileID);  
+                int tileIDOnTileset = tileID - m_Tilesets[tileSetIndex].firstID;
+                // std::cout << "tileIDOnTileset: " << tileIDOnTileset << std::endl;
+
                 Tileset ts = m_Tilesets[tileSetIndex];
-                int tileRow = tileIDOnTileset/ts.ColCount; 
+                int tileRow = (tileIDOnTileset/ts.ColCount); 
                 int tileCol = tileIDOnTileset - (tileRow*ts.ColCount);
+                // std::cout << "row, col : " << tileRow << ", " << tileCol << std::endl;
 
                 TextureManager::GetInstance()->DrawTile(ts.Name, j*ts.TileSize, i*ts.TileSize, ts.TileSize, tileRow, tileCol);
             }
         } 
     }
+}
+
+int TileLayer::GetTilesetID(int tileID) {
+    int id = 0;
+    while (tileID > m_Tilesets[id].lastID || tileID < m_Tilesets[id].firstID) {
+        id += 1;
+    }
+    return id;
 }
 
 void TileLayer::Update() {
