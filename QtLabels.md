@@ -1,4 +1,4 @@
-Bien sûr ! Voici **toutes les options générales pour formater le texte dans un `QLabel`** avec **PySide6**, organisées par catégorie : alignement, style, marges, police, etc.
+# QtLabels reminder
 
 ---
 
