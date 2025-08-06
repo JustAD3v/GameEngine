@@ -29,13 +29,19 @@ class GameObject : public IObject {
     public:
         GameObject(Properties* props) : m_TextureID(props->textureID), m_Flip(props->Flip), m_Height(props->Height), m_Width(props->Width) {
             m_Transform = new Transform(props->x, props->y);
+            float px = props->x + props->Width/2;
+            float py = props->y + props->Height/2;
+            m_Origin = new Vector2D(px, py);
         };
+
+        inline Vector2D* GetOrigin() {return m_Origin;}
 
         virtual void Draw() = 0;
         virtual void Update(float dt) = 0;
         virtual void Clean() = 0;
     
         protected:
+            Vector2D* m_Origin; //represent the center of the GameObject
             Transform* m_Transform;
             int m_Width, m_Height;
             std::string m_TextureID;

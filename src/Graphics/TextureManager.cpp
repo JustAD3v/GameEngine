@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 #include "Engine.h"
+#include "Camera.h"
 
 bool TextureManager::Load(std::string id, std::string filename) {
     SDL_Surface* surface = IMG_Load(filename.c_str());
@@ -26,13 +27,17 @@ void TextureManager::Draw(std::string id, float x, float y, float width, float h
 
 void TextureManager::DrawFrame(std::string id, float x, float y, float width, float height, int row, int frame, SDL_FlipMode flip) {
     SDL_FRect srcRect = {frame*width, (row-1)*height, width, height};
-    SDL_FRect destRect = {x, y, width, height};
+    Vector2D cam = Camera::GetInstance()->GetPosition();
+    // SDL_FRect destRect = {x, y, width, height};
+    SDL_FRect destRect = {x - cam.x, y - cam.y, width, height};
     SDL_RenderTextureRotated(Engine::GetInstance()->GetRenderer(), m_TextureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
 void TextureManager::DrawTile(std::string id, float x, float y, float tileSize, int row, int frame, SDL_FlipMode flip) {
     SDL_FRect srcRect = {frame*tileSize, row*tileSize, tileSize, tileSize};
-    SDL_FRect destRect = {x, y, tileSize, tileSize};
+    Vector2D cam = Camera::GetInstance()->GetPosition();
+    //SDL_FRect destRect = {x, y, tileSize, tileSize};
+    SDL_FRect destRect = {x - cam.x, y - cam.y, tileSize, tileSize};
     SDL_RenderTextureRotated(Engine::GetInstance()->GetRenderer(), m_TextureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
