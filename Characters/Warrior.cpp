@@ -28,12 +28,14 @@ void Warrior::Update(float dt) {
         SetFlipState(false);
     }
 
-    
-
     m_RigidBody->Update(dt);
     
     m_Transform->TranslateX(m_RigidBody->GetPosition().x);
     // m_Transform->Translate(m_RigidBody->GetPosition());
+
+    if (m_Collider) {
+        m_Collider->Update();
+    }
 
     m_Origin->x = m_Transform->x + m_Width/2;
     m_Origin->y = m_Transform->y + m_Width/2;

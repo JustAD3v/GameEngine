@@ -51,6 +51,7 @@ void Engine::Init() {
     TextureManager::GetInstance()->Load("playerRun", "/Users/colin/Code/GameEngine/assets/player/Run32.png");
     
     player = new Warrior(new Properties("playerRun", SCREEN_WIDTH/2, 0, 32, 32));
+    player->AddCollider<class BoxCollider>(player->GetOrigin(), 32, 32);
 
     Camera::GetInstance()->SetTarget(player->GetOrigin());
     m_IsRunning = true;

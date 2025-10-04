@@ -17,7 +17,6 @@ class Transform {
         inline void TranslateX(float X) {x += X;} 
         inline void TranslateY(float Y) {y += Y;} 
         inline void Translate(Vector2D v) {x += v.x; y += v.y;} 
-
 };
 
 

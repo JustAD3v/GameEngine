@@ -39,6 +39,6 @@ LDFLAGS = -L./SDL3/lib -lSDL3 \
 #backup
 
 OUT = build/engine.exe
-SRC = src/main.cpp src/Core/Engine.cpp src/Graphics/TextureManager.cpp Characters/Warrior.cpp src/Graphics/Animation.cpp src/Inputs/Input.cpp src/Timer/Timer.cpp src/Map/MapParser.cpp src/Map/TileLayer.cpp src/Camera/Camera.cpp
+SRC = src/main.cpp src/Core/Engine.cpp src/Graphics/TextureManager.cpp Characters/Warrior.cpp src/Graphics/Animation.cpp src/Inputs/Input.cpp src/Timer/Timer.cpp src/Map/MapParser.cpp src/Map/TileLayer.cpp src/Camera/Camera.cpp src/Colliders/BoxCollider.cpp
 all:
 	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS) -o $(OUT)

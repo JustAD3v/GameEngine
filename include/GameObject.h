@@ -3,6 +3,8 @@
 
 #include "IObject.h"
 #include "Transform.h"
+#include "Collider.h"
+#include "BoxCollider.h"
 
 //#include <SDL3_image/SDL_image.h>
 #include <SDL3/SDL.h>
@@ -34,6 +36,14 @@ class GameObject : public IObject {
             m_Origin = new Vector2D(px, py);
         };
 
+        template<typename ColliderType, typename... Args>
+        void AddCollider(Args&&... args) {
+            if (m_Collider) {
+                delete m_Collider;
+            }
+            m_Collider = new ColliderType(std::forward<Args>(args)...); //work on it later to understand it better
+        }
+
         inline Vector2D* GetOrigin() {return m_Origin;}
 
         virtual void Draw() = 0;
@@ -43,6 +53,7 @@ class GameObject : public IObject {
         protected:
             Vector2D* m_Origin; //represent the center of the GameObject
             Transform* m_Transform;
+            Collider* m_Collider = nullptr;
             int m_Width, m_Height;
             std::string m_TextureID;
             SDL_FlipMode m_Flip;
