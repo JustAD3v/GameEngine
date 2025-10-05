@@ -18,8 +18,6 @@ class BoxCollider : public GameObjectCollider {
         float m_Width, m_Height;
         std::vector<Vector2D> m_Axes;
         std::vector<Vector2D> m_Vertices;
-
 };
-
 
 #endif
