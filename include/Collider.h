@@ -9,12 +9,6 @@ class Collider {
         Collider(Vector2D* target) : m_Target(target), m_Position(*target) {};
         virtual ~Collider() = default;
 
-        inline void Update() {
-            m_Position = *m_Target;
-            UpdateAxesAndVertices();
-        }
-
-        virtual void UpdateAxesAndVertices() = 0;
         virtual void ProjectOnAxis(const Vector2D& axis, float& min, float& max) const = 0;
         
         //isOverlapped methods
@@ -23,7 +17,6 @@ class Collider {
         //for double dispatch
         virtual bool isOverlappedWithBox(const class BoxCollider& box) const = 0;
         //virtual bool isOverlappedWithCircle(const class CircleCollider& circle) const = 0;
-
 
         virtual std::vector<Vector2D> GetAxes() const = 0; 
         virtual std::vector<Vector2D> GetVertices() const = 0;
@@ -34,6 +27,5 @@ class Collider {
         Vector2D* m_Target;
         Vector2D m_Position;
 };
-
 
 #endif

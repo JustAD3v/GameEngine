@@ -18,7 +18,7 @@ class Engine {
             return s_Instance = (s_Instance != nullptr) ? s_Instance : new Engine();
         }
 
-        void Init();void Init();
+        void Init();
         void Clean();
         void Quit();
 

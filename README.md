@@ -447,7 +447,7 @@
 
     ---
 
-    * `GameObject(Properties* props)` : Constructor. Initializes the GameObject with the given properties (textureID, position, dimensions, flip mode). Also initializes `m_Transform` and calculates the object’s `m_Origin`.
+    * `GameObject(Properties* props)` : Constructor. Initializes the GameObject with the given properties (textureID, position, dimensions, flip mode... see [Properties struct](#properties-struct)). Also initializes `m_Transform` and calculates the object’s `m_Origin`.
 
     * `template<typename ColliderType, typename... Args> void AddCollider(Args&&... args)` : Adds a collider of type `ColliderType` to the GameObject. If a collider already exists, it is deleted and replaced.
 
@@ -511,7 +511,7 @@
         ```
         And create the instance in `Init()` method of the Engine :
         ```c++
-            player = new Warrior(new Properties("playerRun", SCREEN_WIDTH/2, 0, 32, 32));
+            player = new Player(new Properties("playerRun", SCREEN_WIDTH/2, 0, 32, 32));
             player->AddCollider<class BoxCollider>(player->GetOrigin(), 32, 32);
 
             Camera::GetInstance()->SetTarget(player->GetOrigin());

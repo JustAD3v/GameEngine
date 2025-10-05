@@ -3,7 +3,7 @@
 
 #include "IObject.h"
 #include "Transform.h"
-#include "Collider.h"
+#include "GameObjectCollider.h"
 #include "BoxCollider.h"
 
 //#include <SDL3_image/SDL_image.h>
@@ -53,7 +53,7 @@ class GameObject : public IObject {
         protected:
             Vector2D* m_Origin; //represent the center of the GameObject
             Transform* m_Transform;
-            Collider* m_Collider = nullptr;
+            GameObjectCollider* m_Collider = nullptr;
             int m_Width, m_Height;
             std::string m_TextureID;
             SDL_FlipMode m_Flip;
