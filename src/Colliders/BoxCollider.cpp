@@ -29,7 +29,7 @@ void BoxCollider::ProjectOnAxis(const Vector2D& axis, float& min, float& max) co
     }
 }
 
-bool BoxCollider::isOverlapped(const GameObjectCollider& other) const {
+bool BoxCollider::isOverlapped(const Collider& other) const {
     return other.isOverlappedWithBox(*this);
 }
 
