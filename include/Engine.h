@@ -40,3 +40,30 @@ class Engine {
 };
 
 #endif
+
+/*
+// Engine.h
+#pragma once
+#include <SDL3/SDL.h>
+#include "Timer.h"
+#include "IGame.h"
+
+class Engine {
+public:
+    static Engine* GetInstance();
+    void Run(IGame* game);
+
+private:
+    Engine() = default;
+    bool Init();
+    void Events();
+    void Update();
+    void Render();
+    void Clean();
+
+    bool m_IsRunning = false;
+    SDL_Window* m_Window = nullptr;
+    SDL_Renderer* m_Renderer = nullptr;
+    IGame* m_CurrentGame = nullptr;
+};
+*/

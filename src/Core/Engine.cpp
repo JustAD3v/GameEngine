@@ -88,3 +88,25 @@ void Engine::Quit() {
     m_IsRunning = false;
 }
 
+/*
+void Engine::Run(IGame* game) {
+    if (!Init()) return;
+
+    m_CurrentGame = game;
+    m_CurrentGame->OnInit();
+    m_IsRunning = true;
+
+    while (m_IsRunning) {
+        Events();
+        m_CurrentGame->OnUpdate(Timer::GetInstance()->GetDeltaTime());
+        SDL_SetRenderDrawColor(m_Renderer, 255, 236, 161, 255);
+        SDL_RenderClear(m_Renderer);
+        m_CurrentGame->OnRender();
+        SDL_RenderPresent(m_Renderer);
+        Timer::GetInstance()->Tick();
+    }
+
+    m_CurrentGame->OnClean();
+    Clean();
+}
+*/

@@ -24,7 +24,7 @@ LDFLAGS = -L./SDL3/lib -lSDL3 \
 # #Compilation of objetc files
 # build/objfiles/%.o: %.cpp
 # #make does not create dir automatically so create it if not exist (-p)
-# 	$(subst /,\,$(dir $@))
+# 	if not exist "build/objfiles" mkdir build/objfiles
 # 	$(CC) $(CFLAGS) -c $< -o $@
 
 # #clean
