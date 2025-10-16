@@ -41,15 +41,15 @@ void Engine::Init() {
         return;
     }
 
-    if(!MapParser::GetInstance()->Load("level1", "/Users/colin/Code/GameEngine/assets/maps/level1.tmj")) {
+    if(!MapParser::GetInstance()->Load("level1", "assets/maps/level1.tmj")) {
         std::cout << "Failed to load map" << std::endl;
     }
 
     m_LevelMap = MapParser::GetInstance()->GetMap("level1");
 
-    TextureManager::GetInstance()->Load("playerIdle", "/Users/colin/Code/GameEngine/assets/player/Idle32.png");
-    TextureManager::GetInstance()->Load("playerRun", "/Users/colin/Code/GameEngine/assets/player/Run32.png");
-    
+    TextureManager::GetInstance()->Load("playerIdle", "assets/player/Idle32.png");
+    TextureManager::GetInstance()->Load("playerRun", "assets/player/Run32.png");
+
     player = new Warrior(new Properties("playerRun", SCREEN_WIDTH/2, 0, 32, 32));
     player->AddCollider<class BoxCollider>(player->GetOrigin(), 32, 32);
 
@@ -81,7 +81,7 @@ void Engine::Clean() {
     TextureManager::GetInstance()->Clean();
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
-    SDL_Quit();   
+    SDL_Quit();
 }
 
 void Engine::Quit() {

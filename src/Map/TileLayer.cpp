@@ -21,18 +21,18 @@ void TileLayer::Render() {
                 continue;
             }
             else {
-                int tileSetIndex = GetTilesetID(tileID);  
+                int tileSetIndex = GetTilesetID(tileID);
                 int tileIDOnTileset = tileID - m_Tilesets[tileSetIndex].firstID;
                 // std::cout << "tileIDOnTileset: " << tileIDOnTileset << std::endl;
 
                 Tileset ts = m_Tilesets[tileSetIndex];
-                int tileRow = (tileIDOnTileset/ts.ColCount); 
+                int tileRow = (tileIDOnTileset/ts.ColCount);
                 int tileCol = tileIDOnTileset - (tileRow*ts.ColCount);
                 // std::cout << "row, col : " << tileRow << ", " << tileCol << std::endl;
 
                 TextureManager::GetInstance()->DrawTile(ts.Name, j*ts.TileSize, i*ts.TileSize, ts.TileSize, tileRow, tileCol);
             }
-        } 
+        }
     }
 }
 
