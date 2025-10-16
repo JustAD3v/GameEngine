@@ -1,44 +1,37 @@
 CC = g++
-CFLAGS = -I./SDL3/include \
-		 -I./SDL3_image/include \
-		 -I./include \
-		 -I./Characters
+AR = ar rcs
 
-LDFLAGS = -L./SDL3/lib -lSDL3 \
-		  -L./SDL3_image/lib -lSDL3_image \
-		  #-L./SDL3_ttf/lib -lSDL3_ttf
+CFLAGS = -I./SDL3/include -I./SDL3_image/include -I./include -I./Characters
+LDFLAGS = -L./SDL3/lib -lSDL3 -L./SDL3_image/lib -lSDL3_image
 
-#==============New test
-# SRC = $(wildcard src/*.cpp) $(wildcard src/**/*.cpp) $(wildcard Characters/*.cpp)
-# OBJ = $(patsubst %.cpp, build/objfiles/%.o, $(SRC))
-
-# OUT = build/engine.exe
-
-# #Main rule
-# all: $(OUT)
-
-# #Linking
-# $(OUT) : $(OBJ)
-# 	$(CC) $(OBJ) -o $(OUT) $(LDFLAGS)
-
-# #Compilation of objetc files
-# build/objfiles/%.o: %.cpp
-# #make does not create dir automatically so create it if not exist (-p)
-# 	if not exist "build/objfiles" mkdir build/objfiles
-# 	$(CC) $(CFLAGS) -c $< -o $@
-
-# #clean
-# clean:
-# 	rmdir /s build/objfiles
-
-# run: $(OUT)
-# 	./$(OUT)
-#=========================
-
-
-#backup
-
-OUT = build/engine.exe
 SRC = $(wildcard src/*.cpp) $(wildcard src/**/*.cpp) $(wildcard Characters/*.cpp)
-all:
-	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS) -o $(OUT)
+OBJ = $(patsubst %.cpp, build/obj/%.o, $(SRC))
+
+OUT_DIR = build
+OBJ_DIR = $(OUT_DIR)/obj
+OUT_LIB = $(OUT_DIR)/libEngine.a
+
+# Commandes Windows
+MKDIR = if not exist "$(subst /,\\,$(1))" mkdir "$(subst /,\\,$(1))"
+RMDIR = if exist "$(subst /,\\,$(1))" rmdir /s /q "$(subst /,\\,$(1))"
+
+# Règle principale
+all: $(OUT_LIB)
+
+$(OUT_LIB): $(OBJ)
+	@echo Creating static library...
+	@$(call MKDIR,$(OUT_DIR))
+	$(AR) $(OUT_LIB) $(OBJ)
+	@echo Library generated : $(OUT_LIB)
+
+# Compilation des objets
+$(OBJ_DIR)/%.o: %.cpp
+	@$(call MKDIR,$(dir $@))
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Nettoyage
+clean:
+	@$(call RMDIR,$(OUT_DIR))
+	@echo Cleaning done
+
+.PHONY: all clean

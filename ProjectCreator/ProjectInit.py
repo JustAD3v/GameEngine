@@ -16,8 +16,8 @@ if not os.path.exists(srcDir):
 
 IGameFile = """
 // IGame.h
-#pragma once
-
+#ifndef IGAME_H
+#define IGAME_H
 class IGame {
 public:
     virtual ~IGame() = default;
@@ -26,15 +26,14 @@ public:
     virtual void OnRender() = 0;
     virtual void OnClean() = 0;
 };
-
+#endif
 """
 
 
 GameFileH = """
-#pragma once
+#ifndef GAMEFILE_H
+#define GAMEFILE_H
 #include "IGame.h"
-#include "Warrior.h"
-#include "MapParser.h"
 
 class {name} : public IGame {
 public:
@@ -44,9 +43,9 @@ public:
     void OnClean() override;
 
 private:
-    Warrior* player = nullptr;
-    Map* level = nullptr;
+    
 };
+#endif
 
 """.format(name=projectName)
 
@@ -55,6 +54,7 @@ GameFileSrc = """
 #include "TextureManager.h"
 #include "Camera.h"
 #include "Engine.h"
+#include "MapParser.h"
 
 void {name}::OnInit() {
     //MapParser::GetInstance()->Load("level1", "assets/maps/level1.tmj");
