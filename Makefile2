@@ -9,31 +9,33 @@ LDFLAGS := -L./SDL3/lib -lSDL3 \
 		  -L./SDL3_image/lib -lSDL3_image \
 		  #-L./SDL3_ttf/lib -lSDL3_ttf
 
-OBJ := $(SRC:%.cpp=%.o)
-OUT_OBJS := $(OBJ:%.o=$(OUT_DIR)/%.o)
+OBJ := $(SRC:%.cpp=$(OUT_DIR)/%.o)
+#OUT_OBJS := $(OBJ:%.o=$(OUT_DIR)/%.o)
 
 .PHONY: all clean
 
 # tout faire -> pas un fichier donc dans phony
 all: $(TARGET)
-	@echo -e "Done.\n"
+	@echo "Done.\n"
 
 # edition des liens
-$(TARGET): $(OBJ) | $(BIN_DIR)
-	$(CC) $(OUT_OBJS) -o $@ $(LDFLAGS) $(LDLIBS)
+$(TARGET): $(OBJ) | $(OUT_DIR)
+	@echo "Edition des liens"
+	$(CC) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
 
 # fichiers objets
-%.o: %.cpp
-	mkdir -p $(OUT_DIR)$(@D)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $(OUT_DIR)/$@
+$(OBJ) : $(OUT_DIR)/%.o: %.cpp
+	mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
-$(BIN_DIR) $(OBJ_DIR):
+$(OUT_DIR):
 	mkdir -p $@
 
 clean:
 	$(RM) $(OUT_DIR)/*.o
-	$(RM) $(OUT_DIR)/src/*.o
+	$(RM) -r $(OUT_DIR)/src
+	$(RM) $(OUT_DIR)/*/*.o
 	$(RM) $(OUT_DIR)/*.d
-	$(RM) $(OUT_DIR)/src/*.d
 	$(RM) $(OUT_DIR)/engine.exe
+	$(RM) -r $(OUT_DIR)/Characters
 	@echo -e "Clean.\n"
