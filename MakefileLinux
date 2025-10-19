@@ -1,0 +1,41 @@
+CC = g++
+OUT_DIR = build
+TARGET = $(OUT_DIR)/engine.exe
+SRC = $(wildcard src/*.cpp) $(wildcard src/**/*.cpp) $(wildcard Characters/*.cpp)
+
+CFLAGS := -I./SDL3/include -I./SDL3_image/include -Iinclude -ICharacters
+
+LDFLAGS := -L./SDL3/lib -lSDL3 \
+		  -L./SDL3_image/lib -lSDL3_image \
+		  #-L./SDL3_ttf/lib -lSDL3_ttf
+
+OBJ := $(SRC:%.cpp=$(OUT_DIR)/%.o)
+#OUT_OBJS := $(OBJ:%.o=$(OUT_DIR)/%.o)
+
+.PHONY: all clean
+
+# tout faire -> pas un fichier donc dans phony
+all: $(TARGET)
+	@echo "Done.\n"
+
+# edition des liens
+$(TARGET): $(OBJ) | $(OUT_DIR)
+	@echo "Edition des liens"
+	$(CC) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
+
+# fichiers objets
+$(OBJ) : $(OUT_DIR)/%.o: %.cpp
+	mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+$(OUT_DIR):
+	mkdir -p $@
+
+clean:
+	$(RM) $(OUT_DIR)/*.o
+	$(RM) -r $(OUT_DIR)/src
+	$(RM) $(OUT_DIR)/*/*.o
+	$(RM) $(OUT_DIR)/*.d
+	$(RM) $(OUT_DIR)/engine.exe
+	$(RM) -r $(OUT_DIR)/Characters
+	@echo -e "Clean.\n"
