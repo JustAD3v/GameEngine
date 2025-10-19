@@ -11,3 +11,5 @@ venv/
 .vscode/
 build/obj
 build/libEngine.a
+Example/build/src
+Example/build/game.exe
