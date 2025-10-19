@@ -11,27 +11,34 @@ OUT_DIR = build
 OBJ_DIR = $(OUT_DIR)/obj
 OUT_LIB = $(OUT_DIR)/libEngine.a
 
-# Commandes Windows
-MKDIR = if not exist "$(subst /,\\,$(1))" mkdir "$(subst /,\\,$(1))"
-RMDIR = if exist "$(subst /,\\,$(1))" rmdir /s /q "$(subst /,\\,$(1))"
+ifdef OS
+	# Commandes Windows
+	MKDIR = if not exist "$(subst /,\\,$(1))" mkdir "$(subst /,\\,$(1))"
+	RMDIR = if exist "$(subst /,\\,$(1))" rmdir /s /q "$(subst /,\\,$(1))"
+else
+	ifeq ($(shell uname), Linux)
+		MKDIR = mkdir -p
+		RMDIR = rmdir
+	endif
+endif
 
 # Règle principale
 all: $(OUT_LIB)
 
 $(OUT_LIB): $(OBJ)
 	@echo Creating static library...
-	@$(call MKDIR,$(OUT_DIR))
+	$(MKDIR) $(OUT_DIR)
 	$(AR) $(OUT_LIB) $(OBJ)
 	@echo Library generated : $(OUT_LIB)
 
 # Compilation des objets
 $(OBJ_DIR)/%.o: %.cpp
-	@$(call MKDIR,$(dir $@))
+	$(MKDIR) $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Nettoyage
 clean:
-	@$(call RMDIR,$(OUT_DIR))
+	RMDIR $(OBJ_DIR)
 	@echo Cleaning done
 
 .PHONY: all clean

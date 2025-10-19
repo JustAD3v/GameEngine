@@ -9,3 +9,7 @@ venv/
 .DS_Store
 .idea/
 .vscode/
+build/obj
+build/libEngine.a
+Example/build/src
+Example/build/game.exe

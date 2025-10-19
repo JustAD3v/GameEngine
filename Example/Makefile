@@ -8,14 +8,18 @@ OBJ = $(patsubst %.cpp, build/obj/%.o, $(SRC))
 
 all: $(OUT)
 
-$(OUT): $(OBJ) ../build/libEngine.a
-	@if not exist build mkdir build
+$(OUT): $(OBJ) ../build/libEngine.a build
 	$(CC) $(OBJ) -o $(OUT) $(LDFLAGS)
 
-build/obj/%.o: %.cpp ../include/IGame.h ../include/Engine.h
-	@if not exist build\obj mkdir build\obj
+build/obj/%.o: %.cpp ../include/IGame.h ../include/Engine.h build/obj
 	$(CC) $(CFLAGS) -c $< -o $@
 
+build/obj:
+	mkdir build/obj
+
+build:
+	mkdir build
+	
 run: all
 	$(OUT)
 
