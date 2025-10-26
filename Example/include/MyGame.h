@@ -1,8 +1,11 @@
 #ifndef GAMEFILE_H
 #define GAMEFILE_H
-#include "IGame.h"
-#include "Warrior.h"
+/*Imports from Engine*/
+#include "IGame.h" 
 #include "GameMap.h"
+/*===================*/ 
+#include "Warrior.h"
+#include "Obstacle.h"
 
 class MyGame : public IGame {
 public:
@@ -14,5 +17,6 @@ public:
 private:
     GameMap* m_LevelMap;
     Warrior* player = nullptr;
+    Obstacle *obstacle = nullptr;
 };
 #endif

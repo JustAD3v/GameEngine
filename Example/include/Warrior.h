@@ -1,9 +1,10 @@
 #ifndef WARRIOR_H
 #define WARRIOR_H
-
+/*Imports from Engine*/
 #include "Character.h"
 #include "Animation.h"
-#include "RigidBody.h" 
+#include "RigidBody.h"
+/*===================*/ 
 
 class Warrior: public Character{
     public:

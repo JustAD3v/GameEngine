@@ -12,7 +12,7 @@ $(OUT): $(OBJ) ../build/libEngine.a
 	@if not exist build mkdir build
 	$(CC) $(OBJ) -o $(OUT) $(LDFLAGS)
 
-build/obj/%.o: %.cpp ../include/IGame.h ../include/Engine.h
+build/obj/%.o: %.cpp ../include/IGame.h ../include/Engine.h 
 	@if not exist build\obj mkdir build\obj
 	$(CC) $(CFLAGS) -c $< -o $@
 
