@@ -44,7 +44,12 @@ void Warrior::Update(float dt) {
 }
 
 void Warrior::Clean() {
-    TextureManager::GetInstance()->Clean();
+    //TextureManager::GetInstance()->Clean();
+}
+
+Warrior::~Warrior() {
+    if (m_Animation) delete m_Animation;
+    if (m_RigidBody) delete m_RigidBody;
 }
 
 

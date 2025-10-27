@@ -36,6 +36,12 @@ class GameObject : public IObject {
             m_Origin = new Vector2D(px, py);
         };
 
+        virtual ~GameObject() {
+            if (m_Collider) delete m_Collider;
+            if (m_Transform) delete m_Transform;
+            if (m_Origin) delete m_Origin;
+    }
+
         template<typename ColliderType, typename... Args>
         void AddCollider(Args&&... args) {
             if (m_Collider) {

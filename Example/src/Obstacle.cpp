@@ -6,18 +6,17 @@ Obstacle::Obstacle(Properties* props) : GameObject(props) {
 }
 
 void Obstacle::Draw() {
-    TextureManager::GetInstance()->Draw("boxIdle", m_Transform->x, m_Transform->y, m_Width, m_Height); //Actually draws the sprite on the screen
+    TextureManager::GetInstance()->DrawFrame("boxIdle", m_Transform->x, m_Transform->y, m_Width, m_Height,1,0); //Actually draws the sprite on the screen
 }
 
 void Obstacle::Update(float dt) {
-    
     if (m_Collider) {
         m_Collider->Update();
     }
 }
 
 void Obstacle::Clean() {
-    TextureManager::GetInstance()->Clean();
+    //TextureManager::GetInstance()->Clean();
 }
 
 

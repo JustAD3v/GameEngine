@@ -9,6 +9,7 @@
 class Warrior: public Character{
     public:
         Warrior(Properties* props);
+        virtual ~Warrior();
 
         virtual void Draw();
         virtual void Update(float dt);

@@ -1,6 +1,7 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 #include "GameObject.h"
+#include "Animation.h"
 
 class Obstacle : public GameObject {
     public:
@@ -11,7 +12,7 @@ class Obstacle : public GameObject {
         virtual void Clean();
         
     private:
-
+        Animation* m_Animation;
 };
 
 #endif

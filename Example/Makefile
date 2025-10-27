@@ -13,13 +13,14 @@ $(OUT): $(OBJ) ../build/libEngine.a
 	$(CC) $(OBJ) -o $(OUT) $(LDFLAGS)
 
 build/obj/%.o: %.cpp ../include/IGame.h ../include/Engine.h 
-	@if not exist build\obj mkdir build\obj
+	@if not exist build\obj\src mkdir build\obj\src
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: all
 	$(OUT)
 
 clean:
-	if exist build rmdir /S /Q build
+	@if exist "build/obj" rmdir /S /Q "build/obj" && echo Obj folder deleted.
+	@if exist "build\game.exe" del /F /Q "build\game.exe" && echo Executable deleted.
 
 .PHONY: all run clean
