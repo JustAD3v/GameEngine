@@ -15,7 +15,7 @@ class Camera {
         void Update(float dt);
 
     private:
-        Camera() {m_ViewBox = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};}
+        Camera() { m_Target = nullptr; m_ViewBox = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT}; }
         Vector2D* m_Target;
         Vector2D m_Position;
 

@@ -18,5 +18,6 @@ private:
     GameMap* m_LevelMap;
     Warrior* player = nullptr;
     Obstacle *obstacle = nullptr;
+    int countCollide = 0;
 };
 #endif

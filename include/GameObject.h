@@ -50,6 +50,8 @@ class GameObject : public IObject {
             m_Collider = new ColliderType(std::forward<Args>(args)...); //work on it later to understand it better
         }
 
+        inline GameObjectCollider* getCollider() {return m_Collider;}
+
         inline Vector2D* GetOrigin() {return m_Origin;}
 
         virtual void Draw() = 0;

@@ -50,6 +50,9 @@ void Warrior::Clean() {
 Warrior::~Warrior() {
     if (m_Animation) delete m_Animation;
     if (m_RigidBody) delete m_RigidBody;
+    #ifdef DEBUG
+    std::cout << "GameObject Destructor called !" << std::endl;
+    #endif
 }
 
 

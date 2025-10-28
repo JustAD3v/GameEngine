@@ -1,6 +1,7 @@
 CC = g++
 CFLAGS = -I../include -I../SDL3/include -I../SDL3_image/include -I./include
 LDFLAGS = -L../build -lEngine -L../SDL3/lib -lSDL3 -L../SDL3_image/lib -lSDL3_image
+DBGFLAG = -DDEBUG
 
 OUT = build/game.exe
 SRC = $(wildcard src/*.cpp)
@@ -10,11 +11,11 @@ all: $(OUT)
 
 $(OUT): $(OBJ) ../build/libEngine.a
 	@if not exist build mkdir build
-	$(CC) $(OBJ) -o $(OUT) $(LDFLAGS)
+	$(CC) $(OBJ) -o $(OUT) $(LDFLAGS) 
 
 build/obj/%.o: %.cpp ../include/IGame.h ../include/Engine.h 
 	@if not exist build\obj\src mkdir build\obj\src
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DBGFLAG) -c $< -o $@
 
 run: all
 	$(OUT)

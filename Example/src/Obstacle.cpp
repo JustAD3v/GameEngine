@@ -19,4 +19,10 @@ void Obstacle::Clean() {
     //TextureManager::GetInstance()->Clean();
 }
 
+Obstacle::~Obstacle() {
+    #ifdef DEBUG
+    std::cout << "GameObject Destructor called !" << std::endl;
+    #endif
+}
+
 

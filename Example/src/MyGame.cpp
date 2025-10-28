@@ -12,6 +12,9 @@ void MyGame::OnInit() {
     //Test with GetCurrentDirectory
     //SetCurrentDirectory((LPCTSTR)".."); //to find assets folder 
     /*==========================================*/
+    #ifdef DEBUG
+    std::cout << "DEBUG Mode ON" << std::endl;
+    #endif
 
     if(!MapParser::GetInstance()->Load("level1", "assets/maps/level1.tmj")) {
         std::cout << "Failed to load map" << std::endl;
@@ -25,11 +28,14 @@ void MyGame::OnInit() {
     TextureManager::GetInstance()->Load("boxIdle", "assets/items/BoxIdle.png");
     
     player = new Warrior(new Properties("playerRun", SCREEN_WIDTH/2, 0, 32, 32));
-    //player->AddCollider<class BoxCollider>(player->GetOrigin(), 32, 32);
-    obstacle = new Obstacle(new Properties("boxIdle", SCREEN_WIDTH/2, 50, 28, 24));
-
+    player->AddCollider<class BoxCollider>(player->GetOrigin(), 32, 32);
+    
+    obstacle = new Obstacle(new Properties("boxIdle", SCREEN_WIDTH/2 + 50, 0, 28, 24));
+    obstacle->AddCollider<class BoxCollider>(obstacle->GetOrigin(), 28, 24);
 
     Camera::GetInstance()->SetTarget(player->GetOrigin());
+
+    countCollide = 0;
 }
 
 void MyGame::OnUpdate(float dt) {
@@ -37,6 +43,9 @@ void MyGame::OnUpdate(float dt) {
     player->Update(dt);
     obstacle->Update(dt);
     Camera::GetInstance()->Update(dt);
+    // if (player->getCollider()->isOverlapped(*(obstacle->getCollider()))) { //rethink usage of pointers/refs
+    //     std::cout << "Player collides with box : " << (countCollide++) << std::endl;
+    // } 
 }
 
 void MyGame::OnRender() {
@@ -47,6 +56,12 @@ void MyGame::OnRender() {
 
 void MyGame::OnClean() {
     //TextureManager::GetInstance()->Clean(); //handled in the Engine before exiting Run method.
+    // Remove camera target before deleting the player to avoid a dangling pointer
+    Camera::GetInstance()->SetTarget(nullptr);
+
     delete player;
+    player = nullptr;
+
     delete obstacle;
+    obstacle = nullptr;
 }

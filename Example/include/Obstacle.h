@@ -6,6 +6,7 @@
 class Obstacle : public GameObject {
     public:
         Obstacle(Properties* props);
+        virtual ~Obstacle();
 
         virtual void Draw();
         virtual void Update(float dt);
