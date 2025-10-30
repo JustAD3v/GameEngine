@@ -7,6 +7,17 @@ Input::Input() {
     m_KeyStates = SDL_GetKeyboardState(nullptr);
 }
 
+Input::~Input() {
+    SDL_Log("Input Manager destroyed");
+}
+
+void Input::DestroyInstance() {
+    if (s_Instance) {
+        delete s_Instance;
+        s_Instance = nullptr;
+    }
+}
+
 void Input::Listen() {
     SDL_Event event;
 

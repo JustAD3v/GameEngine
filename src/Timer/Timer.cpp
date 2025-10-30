@@ -13,4 +13,11 @@ void Timer::Tick() {
     // SDL_Log("DeltaTime : %0.4f", m_DeltaTime);
 }
 
+void Timer::DestroyInstance() {
+    if (s_Instance) {
+        delete s_Instance;
+        s_Instance = nullptr;
+    }
+}
+
 

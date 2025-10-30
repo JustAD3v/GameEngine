@@ -64,9 +64,16 @@ TileLayer* MapParser::ParseTileLayer(json Jtilelayer, int tilesize, int rowcount
 }
 
 void MapParser::Clean() {
-    std::map<std::string, GameMap*>::iterator it;
-    for(it = m_MapDict.begin(); it != m_MapDict.end(); it++) {
+    for (auto it = m_MapDict.begin(); it != m_MapDict.end(); ++it) {
+        delete it->second;       // delete l'objet GameMap et tout ce qu'il contient
         it->second = nullptr;
     }
     m_MapDict.clear();
+}
+
+void MapParser::DestroyInstance() {
+    if (s_Instance) {
+        delete s_Instance;
+        s_Instance = nullptr;
+    }
 }

@@ -58,10 +58,22 @@ void Engine::Events() {
 }
 
 void Engine::Clean() {
-    TextureManager::GetInstance()->Clean();
+    m_CurrentGame = nullptr;
+    if (MapParser::GetInstance()) {
+        MapParser::GetInstance()->Clean();
+    }
+    if (TextureManager::GetInstance()) {
+        TextureManager::GetInstance()->Clean();
+    }
+    MapParser::DestroyInstance();
+    TextureManager::DestroyInstance();
+    Camera::DestroyInstance();
+    Input::DestroyInstance();
+    Timer::DestroyInstance();
+
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
-    SDL_Quit();   
+    SDL_Quit();
 }
 
 void Engine::Quit() {

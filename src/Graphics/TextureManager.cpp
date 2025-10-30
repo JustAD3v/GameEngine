@@ -10,6 +10,7 @@ bool TextureManager::Load(std::string id, std::string filename) {
     }
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(Engine::GetInstance()->GetRenderer(), surface);
+
     if (texture == nullptr) {
         SDL_Log("Failed to create texture : %s", SDL_GetError());
         return false;
@@ -52,4 +53,15 @@ void TextureManager::Clean() {
     }
     m_TextureMap.clear();
     SDL_Log("Texture map cleaned !");
+}
+
+TextureManager::~TextureManager() {
+    SDL_Log("TextureManager destroyed!");
+}
+
+void TextureManager::DestroyInstance() {
+    if (s_Instance) {
+        delete s_Instance;
+        s_Instance = nullptr;
+    }
 }

@@ -2,7 +2,9 @@
 #include "TextureManager.h"
 
 Obstacle::Obstacle(Properties* props) : GameObject(props) {
-    std::cout << "Obstacle created !" << std::endl;
+    #ifdef DEBUG
+    std::cout << "Obstacle Constructor called !" << std::endl;
+    #endif
 }
 
 void Obstacle::Draw() {
@@ -21,7 +23,7 @@ void Obstacle::Clean() {
 
 Obstacle::~Obstacle() {
     #ifdef DEBUG
-    std::cout << "GameObject Destructor called !" << std::endl;
+    std::cout << "Obstacle Destructor called !" << std::endl;
     #endif
 }
 

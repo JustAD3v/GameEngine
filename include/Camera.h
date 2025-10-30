@@ -14,8 +14,11 @@ class Camera {
         inline void SetTarget(Vector2D* target) {m_Target = target;}
         void Update(float dt);
 
+        static void DestroyInstance();
+
     private:
         Camera() { m_Target = nullptr; m_ViewBox = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT}; }
+        ~Camera();
         Vector2D* m_Target;
         Vector2D m_Position;
 

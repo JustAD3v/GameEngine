@@ -21,9 +21,11 @@ class TextureManager {
         void DrawFrame(std::string id, float x, float y, float widht, float height, int row, int frame, SDL_FlipMode flip=SDL_FLIP_NONE);
         
         void Clean();
+        static void DestroyInstance();
 
     private:
         TextureManager() {};
+        ~TextureManager();
         static TextureManager* s_Instance;
         std::map<std::string, SDL_Texture*> m_TextureMap;
 };

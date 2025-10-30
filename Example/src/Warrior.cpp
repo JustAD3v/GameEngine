@@ -6,6 +6,9 @@ Warrior::Warrior(Properties* props) : Character(props) {
     m_RigidBody = new RigidBody();
     m_Animation = new Animation();
     m_Animation->SetProps(m_TextureID, 1, 12, 80, SDL_FLIP_HORIZONTAL);
+    #ifdef DEBUG
+    std::cout << "Warrior Constructor called !" << std::endl;
+    #endif
 }
 
 void Warrior::Draw() {
@@ -51,7 +54,7 @@ Warrior::~Warrior() {
     if (m_Animation) delete m_Animation;
     if (m_RigidBody) delete m_RigidBody;
     #ifdef DEBUG
-    std::cout << "GameObject Destructor called !" << std::endl;
+    std::cout << "Warrior Destructor called !" << std::endl;
     #endif
 }
 

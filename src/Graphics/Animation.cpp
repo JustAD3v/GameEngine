@@ -16,3 +16,4 @@ void Animation::SetProps(std::string textureID, int spriteRow, int frameCount, i
     m_TextureID = textureID; 
     m_Flip = flip;
 }
+

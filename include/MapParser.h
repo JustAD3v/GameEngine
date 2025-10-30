@@ -19,6 +19,8 @@ class MapParser {
         inline GameMap* GetMap(std::string id) {return m_MapDict[id];}
         inline static MapParser* GetInstance() {return s_Instance = (s_Instance != nullptr) ? s_Instance : new MapParser();}
 
+        static void DestroyInstance();
+
     private:
         bool Parse(std::string id, std::string source);
         Tileset ParseTileset(json Jtileset);

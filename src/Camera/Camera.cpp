@@ -2,6 +2,17 @@
 
 Camera* Camera::s_Instance = nullptr;
 
+Camera::~Camera() {
+    SDL_Log("Camera Destroyed !");
+}
+
+void Camera::DestroyInstance() {
+    if (s_Instance) {
+        delete s_Instance;
+        s_Instance = nullptr;
+    }
+}
+
 void Camera::Update(float dt) {
     if (m_Target != nullptr) {
         m_ViewBox.x = m_Target->x - SCREEN_WIDTH/2;
