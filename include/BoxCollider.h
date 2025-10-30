@@ -6,6 +6,7 @@
 class BoxCollider : public GameObjectCollider {
     public : 
         BoxCollider(Vector2D* target, float width, float height) : GameObjectCollider(target), m_Width(width), m_Height(height) {};
+        ~BoxCollider();
         void UpdateAxesAndVertices() override;
         void ProjectOnAxis(const Vector2D& axis, float& min, float& max) const override;
         bool isOverlapped(const Collider& other) const override;

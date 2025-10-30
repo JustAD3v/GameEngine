@@ -55,3 +55,8 @@ bool BoxCollider::isOverlappedWithBox(const BoxCollider& box) const {
     return true; 
 }
 
+BoxCollider::~BoxCollider() {
+    std::cout << "BoxCollider Destructor called !" << std::endl;
+}
+
+
