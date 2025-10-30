@@ -20,4 +20,8 @@ void Timer::DestroyInstance() {
     }
 }
 
+Timer::~Timer() {
+    SDL_Log("Timer Destroyed");
+}
+
 
