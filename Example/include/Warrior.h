@@ -18,6 +18,8 @@ class Warrior: public Character{
         inline void SetFlipState(bool state) {m_HasFlipped = state;}
         inline bool GetFlipState() {return m_HasFlipped;}
 
+        inline RigidBody* getRigidBody() {return m_RigidBody;}
+
     private:
         // int m_Row, m_Frame, m_FrameCount;
         // int m_AnimSpeed;
