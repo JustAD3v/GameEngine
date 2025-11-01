@@ -32,7 +32,7 @@ void Warrior::Update(float dt) {
         SetFlipState(false);
         GameObject* obstacleObj = m_Scene->getObjectById("obstacle");
         if (m_Collider->isOverlapped(*(obstacleObj->getCollider()))) {
-            std::cout << "Warrior detected a collision with obstacle" << std::endl;  
+            m_RigidBody->UnsetForce();  
         }
     }
 
