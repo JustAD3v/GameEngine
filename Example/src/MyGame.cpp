@@ -27,13 +27,18 @@ void MyGame::OnInit() {
 
     TextureManager::GetInstance()->Load("boxIdle", "assets/items/BoxIdle.png");
     
+    m_Scene1 = new Scene("Scene1");
+
     player = new Warrior(new Properties("playerRun", SCREEN_WIDTH/2, 0, 32, 32));
     player->AddCollider<class BoxCollider>(player->GetOrigin(), 32, 32);
-    
+
     obstacle = new Obstacle(new Properties("boxIdle", SCREEN_WIDTH/2 + 50, 0, 28, 24));
     obstacle->AddCollider<class BoxCollider>(obstacle->GetOrigin(), 28, 24);
 
     Camera::GetInstance()->SetTarget(player->GetOrigin());
+
+    m_Scene1->AddObject("player", player);
+    m_Scene1->AddObject("obstacle", obstacle);
 
     countCollide = 0;
 }
@@ -58,6 +63,8 @@ void MyGame::OnClean() {
     //TextureManager::GetInstance()->Clean(); //handled in the Engine before exiting Run method.
     // Remove camera target before deleting the player to avoid a dangling pointer
     Camera::GetInstance()->SetTarget(nullptr);
+
+    m_Scene1->Clean();
 
     delete player;
     player = nullptr;

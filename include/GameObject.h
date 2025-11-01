@@ -51,8 +51,9 @@ class GameObject : public IObject {
         }
 
         inline GameObjectCollider* getCollider() {return m_Collider;}
-
         inline Vector2D* GetOrigin() {return m_Origin;}
+
+        inline Scene* setScene(Scene *scene_ptr) {m_Scene = scene_ptr;}
 
         virtual void Draw() = 0;
         virtual void Update(float dt) = 0;
@@ -65,6 +66,6 @@ class GameObject : public IObject {
             int m_Width, m_Height;
             std::string m_TextureID;
             SDL_FlipMode m_Flip;
+            Scene* m_Scene = nullptr;
 };
-
 #endif
