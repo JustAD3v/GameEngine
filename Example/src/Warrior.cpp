@@ -1,6 +1,7 @@
 #include "Warrior.h"
 #include "TextureManager.h"
 #include "Input.h"
+#include "Scene.h"
 
 Warrior::Warrior(Properties* props) : Character(props) {
     m_RigidBody = new RigidBody();
@@ -29,6 +30,10 @@ void Warrior::Update(float dt) {
         m_Animation->SetProps("playerRun", 1, 12, 80);
         m_RigidBody->ApplyForceX(15);
         SetFlipState(false);
+        GameObject* obstacleObj = m_Scene->getObjectById("obstacle");
+        if (m_Collider->isOverlapped(*(obstacleObj->getCollider()))) {
+            std::cout << "Warrior detected a collision with obstacle" << std::endl;  
+        }
     }
 
     m_RigidBody->Update(dt);

@@ -31,8 +31,13 @@ GameObject* Scene::getObjectById(std::string ObjectID) {
     return nullptr;   
 }
 
-void Scene::Clean() {
-    for (auto it = m_ObjectsMap.begin(); it != m_ObjectsMap.end(); it++) {
-        RemoveObject(it->first);
+void Scene::Clean() { //destroys gameObjects so you can't reuse them in other scenes
+    for (auto& pair : m_ObjectsMap) {
+        if (pair.second) {
+            pair.second->setScene(nullptr); 
+            delete pair.second;            
+        }
     }
+    m_ObjectsMap.clear();
+    m_CollidingObjects.clear();
 }

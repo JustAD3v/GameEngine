@@ -10,8 +10,11 @@
 #include <SDL3/SDL.h>
 #include <string>
 
+//forward declaration to avoid circular inclusion with Scene.h
+class Scene;
+
 struct Properties {
-    public: // "public" pas nécessaire car tout est public par défaut dans une struct
+    public: // "public" not necessary because struct is public by default
         float x, y;
         int Width, Height;
         std::string textureID;

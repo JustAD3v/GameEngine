@@ -1,7 +1,7 @@
 CC = g++
 AR = ar rcs
 
-CFLAGS = -I./SDL3/include -I./SDL3_image/include -I./include -I./Characters
+CFLAGS = -I./SDL3/include -I./SDL3_image/include -I./include
 LDFLAGS = -L./SDL3/lib -lSDL3 -L./SDL3_image/lib -lSDL3_image
 
 SRC = $(wildcard src/*.cpp) $(wildcard src/**/*.cpp) $(wildcard Characters/*.cpp)
