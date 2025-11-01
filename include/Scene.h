@@ -8,15 +8,14 @@
 
 class Scene {
     public:
-        void AddObject(GameObject* obj);
+        void AddObject(std::string ObjectID, GameObject* obj);
         GameObject *getObjectById(std::string ObjectId);
-        void RemoveObject(GameObject* obj);
+        void RemoveObject(std::string ObjectID);
 
     private:
-        std::vector<GameObject*> m_Objects;
         std::map<std::string, GameObject*> m_ObjectsMap;
         std::vector<GameObject*> m_CollidingObjects;
-        std::map<std::string, GameObject*> m_CollidingObjectsMap;
 };
 
 #endif
+

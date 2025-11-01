@@ -13,7 +13,12 @@ class GameObjectCollider : public Collider {
             UpdateAxesAndVertices();
         }
 
+        inline bool isSolid() {return m_IsSolid;} 
+
         virtual void UpdateAxesAndVertices() = 0;
+    
+    private:
+        bool m_IsSolid;
 
 };
 
