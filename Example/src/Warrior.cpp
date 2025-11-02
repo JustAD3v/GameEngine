@@ -24,22 +24,31 @@ void Warrior::Update(float dt) {
         m_Animation->SetProps("playerRun", 1, 12, 80, SDL_FLIP_HORIZONTAL);
         m_RigidBody->ApplyForceX(-15);
         SetFlipState(true);
+        GameObject* obstacleObj = m_Scene->getObjectById("obstacle");
     }
 
     if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)) {
         m_Animation->SetProps("playerRun", 1, 12, 80);
         m_RigidBody->ApplyForceX(15);
         SetFlipState(false);
-        GameObject* obstacleObj = m_Scene->getObjectById("obstacle");
-        if (m_Collider->isOverlapped(*(obstacleObj->getCollider()))) {
-            m_RigidBody->UnsetForce();  
-        }
     }
 
+    Vector2D oldPos = m_Transform->GetPosition();
+    //oldPos.x -= m_RigidBody->GetPosition().x*2;
+    //m_RigidBody->GetPosition().Log();
+    //oldPos.Log("Old : ");
     m_RigidBody->Update(dt);
-    
     m_Transform->TranslateX(m_RigidBody->GetPosition().x);
     //m_Transform->Translate(m_RigidBody->GetPosition());
+    //m_Transform->Log("New : ");
+    
+    GameObject* obstacleObj = m_Scene->getObjectById("obstacle");
+
+    if (m_Collider && obstacleObj && m_Collider->isOverlapped(*(obstacleObj->getCollider()))) {
+        //m_RigidBody->UnsetForce();
+        oldPos.x -= 0.1;
+        m_Transform->SetPosition(oldPos); 
+    }
 
     if (m_Collider) {
         m_Collider->Update();

@@ -20,6 +20,12 @@ class Vector2D {
         inline Vector2D operator*(const float scalar) const {
             return Vector2D(x*scalar, y*scalar);
         }
+        inline bool operator==(const Vector2D v2) const {
+            return (x == v2.x) && (y == v2.y);
+        }
+        inline bool operator!=(const Vector2D v2) const {
+            return (x != v2.x) || (y != v2.y);
+        }
 
         inline float dot(const Vector2D v2) const {
             return (x*v2.x + y*v2.y);
