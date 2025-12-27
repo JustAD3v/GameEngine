@@ -20,6 +20,7 @@ class Scene {
     private:
         std::map<std::string, GameObject*> m_ObjectsMap;
         std::vector<GameObject*> m_CollidingObjects;
+        std::vector<GameObject*> m_DynamicObjects;
         std::string m_SceneID;
 };
 #endif

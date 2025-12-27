@@ -1,10 +1,16 @@
 #include "Scene.h"
+#include "Character.h"
 
 void Scene::AddObject(std::string ObjectID, GameObject* obj) {
     obj->setScene(this);
     m_ObjectsMap.insert({ObjectID, obj}); // insert does nothing if the key already exists !
     if (obj->getCollider() != nullptr && obj->getCollider()->isSolid()) {
         m_CollidingObjects.push_back(obj);
+    }
+    Character* obj_to_char = dynamic_cast<Character*>(obj); //tries to cast obj to Character* type
+    if (obj_to_char) {
+        // if success then it really was a Character*, so add it to the dynamic objects 
+        m_DynamicObjects.push_back(obj);
     }
 }
 
