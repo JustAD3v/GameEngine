@@ -8,6 +8,7 @@
 
 //#include <SDL3_image/SDL_image.h>
 #include <SDL3/SDL.h>
+#include <iostream>
 #include <string>
 
 //forward declaration to avoid circular inclusion with Scene.h
@@ -57,6 +58,8 @@ class GameObject : public IObject {
         inline Vector2D* GetOrigin() {return m_Origin;}
 
         inline Scene* setScene(Scene *scene_ptr) {m_Scene = scene_ptr;}
+
+        inline friend std::ostream& operator<<(std::ostream& os, const GameObject& go) {os << "GameObject with textureID : " << go.m_TextureID << std::endl;}
 
         virtual void Draw() = 0;
         virtual void Update(float dt) = 0;

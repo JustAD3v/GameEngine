@@ -31,6 +31,18 @@ GameObject* Scene::getObjectById(std::string ObjectID) {
     return nullptr;   
 }
 
+std::ostream& operator<<(std::ostream& os, const Scene& s) {
+    std::cout << "Scene (ID : " << s.m_SceneID << ") elements : " << std::endl;
+    for (std::map<std::string, GameObject*>::const_iterator it = s.m_ObjectsMap.begin(); it != s.m_ObjectsMap.end(); ++it) {
+        std::cout << "   " << it->first << " => " << *(it->second);
+    };
+    std::cout << "Elements with solide collider : " << std::endl;
+    for (std::vector<GameObject*>::const_iterator it = s.m_CollidingObjects.begin(); it != s.m_CollidingObjects.end(); ++it) {
+        std::cout << "   " << *(*it);
+    }
+    return os; 
+}
+
 void Scene::Clean() { //destroys gameObjects so you can't reuse them in other scenes
     for (auto& pair : m_ObjectsMap) {
         if (pair.second) {

@@ -40,6 +40,8 @@ void MyGame::OnInit() {
     m_Scene1->AddObject("player", player);
     m_Scene1->AddObject("obstacle", obstacle);
 
+    std::cout << *m_Scene1;
+
     countCollide = 0;
 }
 

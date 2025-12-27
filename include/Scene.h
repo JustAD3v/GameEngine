@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include <algorithm>
+#include <iostream>
 #include "GameObject.h"
 
 class Scene {
@@ -14,6 +15,7 @@ class Scene {
         GameObject *getObjectById(std::string ObjectId);
         void RemoveObject(std::string ObjectID);
         void Clean();
+        friend std::ostream& operator<<(std::ostream& os, const Scene& s);
 
     private:
         std::map<std::string, GameObject*> m_ObjectsMap;
