@@ -29,23 +29,33 @@ struct Properties {
             Width = width;
             Height = height;
             textureID = TextureID; 
+            #ifdef DEBUG
+            std::cout << "Properties constructor : textureID='" << textureID << "', x=" << x << ", y=" << y << "\n";
+            #endif
         }
 };
 
 class GameObject : public IObject {
     public:
-        GameObject(Properties* props) : m_TextureID(props->textureID), m_Flip(props->Flip), m_Height(props->Height), m_Width(props->Width) {
+        GameObject(Properties* props) : m_Width(props->Width), m_Height(props->Height), m_TextureID(props->textureID), m_Flip(props->Flip)
+        {
+            #ifdef DEBUG
+            std::cout << "GameObject ctor: textureID='" << m_TextureID << "', w=" << m_Width << ", h=" << m_Height << "\n";
+            #endif
             m_Transform = new Transform(props->x, props->y);
-            float px = props->x + props->Width/2;
-            float py = props->y + props->Height/2;
+            float px = props->x + props->Width / 2;
+            float py = props->y + props->Height / 2;
             m_Origin = new Vector2D(px, py);
-        };
+        }
 
         virtual ~GameObject() {
+            #ifdef DEBUG
+            std::cout << "GameObject dtor: textureID='" << m_TextureID << "'\n";
+            #endif
             if (m_Collider) delete m_Collider;
             if (m_Transform) delete m_Transform;
             if (m_Origin) delete m_Origin;
-    }
+        }
 
         template<typename ColliderType, typename... Args>
         void AddCollider(Args&&... args) {
@@ -58,9 +68,9 @@ class GameObject : public IObject {
         inline GameObjectCollider* getCollider() {return m_Collider;}
         inline Vector2D* GetOrigin() {return m_Origin;}
 
-        inline Scene* setScene(Scene *scene_ptr) {m_Scene = scene_ptr;}
+        inline void setScene(Scene *scene_ptr) {m_Scene = scene_ptr;}
 
-        inline friend std::ostream& operator<<(std::ostream& os, const GameObject& go) {os << "GameObject with textureID : " << go.m_TextureID << std::endl;}
+        inline friend std::ostream& operator<<(std::ostream& os, const GameObject& go) {os << "GameObject with textureID : " << go.m_TextureID << std::endl; return os;}
         friend class Scene;
 
         virtual void Draw() = 0;

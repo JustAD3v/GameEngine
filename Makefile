@@ -1,6 +1,7 @@
 CC = g++
 AR = ar rcs
 
+INFOFLAGS = -Wall -Wextra -Werror 
 CFLAGS = -I./SDL3/include -I./SDL3_image/include -I./include
 LDFLAGS = -L./SDL3/lib -lSDL3 -L./SDL3_image/lib -lSDL3_image
 
@@ -27,7 +28,7 @@ $(OUT_LIB): $(OBJ)
 # Compilation des objets
 $(OBJ_DIR)/%.o: %.cpp
 	@$(call MKDIR,$(dir $@))
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INFOFLAGS) -c $< -o $@
 
 # Nettoyage
 clean:

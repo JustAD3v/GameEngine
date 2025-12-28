@@ -7,13 +7,13 @@
 class GameMap {
     public:
         void Render() {
-            for(int i = 0; i < m_MapLayers.size(); i++) {
+            for(size_t i = 0; i < m_MapLayers.size(); i++) {
                 m_MapLayers[i]->Render();
             }
         }
 
         void Update() {
-            for (int i = 0; i < m_MapLayers.size(); i++) {
+            for (size_t i = 0; i < m_MapLayers.size(); i++) {
                 m_MapLayers[i]->Update();
             }
         }

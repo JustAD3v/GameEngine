@@ -11,6 +11,9 @@ class RigidBody {
         RigidBody() {
             m_Mass = U_MASS;
             m_Gravity = GRAVITY;
+            #ifdef DEBUG
+            std::cout << "RigidBody constructor called ! \n";
+            #endif
         }
     
         inline void SetMass(float mass) {m_Mass = mass;}

@@ -38,23 +38,35 @@ GameObject* Scene::getObjectById(std::string ObjectID) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Scene& s) {
-    std::cout << "Scene (ID : " << s.m_SceneID << ") elements : " << std::endl;
+    os << "Scene (ID : " << s.m_SceneID << ") elements : " << std::endl;
     for (std::map<std::string, GameObject*>::const_iterator it = s.m_ObjectsMap.begin(); it != s.m_ObjectsMap.end(); ++it) {
-        std::cout << "   " << it->first << " => " << *(it->second);
+        os << "   " << it->first << " => " << *(it->second);
     };
     std::cout << "Elements with solide collider : " << std::endl;
     for (std::vector<GameObject*>::const_iterator it = s.m_CollidingObjects.begin(); it != s.m_CollidingObjects.end(); ++it) {
-        std::cout << "   " << *(*it);
+        os << "   " << *(*it);
     }
     return os; 
 }
 
-void Scene::Update() {
+void Scene::Update(float dt) {
     for (auto it = m_DynamicObjects.begin(); it != m_DynamicObjects.end(); ++it) {
         GameObject* curr_go = (*it);
         Vector2D old_pos = curr_go->m_Transform->GetPosition();
+        curr_go->m_RigidBody->Update(dt);
         curr_go->m_Transform->TranslateX(curr_go->m_RigidBody->GetPosition().x);
-        //m_Transform->Translate(m_RigidBody->GetPosition());
+        // curr_go->m_Transform->Translate(curr_go->m_RigidBody->GetPosition());
+
+        if (curr_go->m_Collider) {
+            for (auto it = m_CollidingObjects.begin(); it != m_CollidingObjects.end(); ++it) {
+                if ((curr_go != *it) && (curr_go->m_Collider->isOverlapped(*((*it)->m_Collider)))) {
+                    old_pos.x -= 0.1;
+                    curr_go->m_Transform->SetPosition(old_pos); 
+                }
+            }
+            curr_go->m_Collider->Update();
+        }
+
     }
 }
 

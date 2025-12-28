@@ -12,7 +12,7 @@ class Camera {
         inline SDL_FRect GetViewBox() {return m_ViewBox;}
         inline Vector2D GetPosition() {return m_Position;}
         inline void SetTarget(Vector2D* target) {m_Target = target;}
-        void Update(float dt);
+        void Update();
 
         static void DestroyInstance();
 

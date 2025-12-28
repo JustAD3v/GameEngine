@@ -7,7 +7,7 @@ TileLayer::TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, 
     m_Tilemap = tilemap;
     m_TileSize = tilesize;
 
-    for (int i = 0; i < m_Tilesets.size(); i++) {
+    for (size_t i = 0; i < m_Tilesets.size(); i++) {
         TextureManager::GetInstance()->Load(m_Tilesets[i].Name, "assets/maps/" + m_Tilesets[i].Source);
     }
 }

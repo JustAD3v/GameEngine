@@ -13,7 +13,7 @@ void Camera::DestroyInstance() {
     }
 }
 
-void Camera::Update(float dt) {
+void Camera::Update() {
     if (m_Target != nullptr) {
         m_ViewBox.x = m_Target->x - SCREEN_WIDTH/2;
         m_ViewBox.y = m_Target->y - SCREEN_HEIGHT/2;

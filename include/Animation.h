@@ -6,7 +6,11 @@
 
 class Animation {
     public:
-        Animation() {};
+        Animation() {
+            #ifdef DEBUG
+            std::cout << "Animation constructor called ! \n";
+            #endif
+        };
 
         void Update();
         void Draw(float x, float y, int spriteWidth, int spriteHeight);

@@ -15,9 +15,8 @@ class Scene {
         GameObject *getObjectById(std::string ObjectId);
         void RemoveObject(std::string ObjectID);
         
-        void Update();
+        void Update(float dt);
         void Clean();
-        
         
         friend std::ostream& operator<<(std::ostream& os, const Scene& s);
 
