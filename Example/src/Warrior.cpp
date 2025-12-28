@@ -4,6 +4,9 @@
 #include "Scene.h"
 
 Warrior::Warrior(Properties* props) : Character(props) {
+    #ifdef DEBUG
+    std::cout << "Entering Warrior ctor\n";
+    #endif
     m_RigidBody = new RigidBody();
     m_Animation = new Animation();
     m_Animation->SetProps(m_TextureID, 1, 12, 80, SDL_FLIP_HORIZONTAL);
@@ -17,6 +20,7 @@ void Warrior::Draw() {
 }
 
 void Warrior::Update(float dt) {
+    (void)dt;
     GetFlipState() ? m_Animation->SetProps("playerIdle", 1, 11, 80, SDL_FLIP_HORIZONTAL) : m_Animation->SetProps("playerIdle", 1, 11, 80);
     m_RigidBody->UnsetForce(); //do not move when the player does not press a key
 
@@ -24,34 +28,13 @@ void Warrior::Update(float dt) {
         m_Animation->SetProps("playerRun", 1, 12, 80, SDL_FLIP_HORIZONTAL);
         m_RigidBody->ApplyForceX(-15);
         SetFlipState(true);
-        GameObject* obstacleObj = m_Scene->getObjectById("obstacle");
+        // GameObject* obstacleObj = m_Scene->getObjectById("obstacle");
     }
 
     if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)) {
         m_Animation->SetProps("playerRun", 1, 12, 80);
         m_RigidBody->ApplyForceX(15);
         SetFlipState(false);
-    }
-
-    Vector2D oldPos = m_Transform->GetPosition();
-    //oldPos.x -= m_RigidBody->GetPosition().x*2;
-    //m_RigidBody->GetPosition().Log();
-    //oldPos.Log("Old : ");
-    m_RigidBody->Update(dt);
-    m_Transform->TranslateX(m_RigidBody->GetPosition().x);
-    //m_Transform->Translate(m_RigidBody->GetPosition());
-    //m_Transform->Log("New : ");
-    
-    GameObject* obstacleObj = m_Scene->getObjectById("obstacle");
-
-    if (m_Collider && obstacleObj && m_Collider->isOverlapped(*(obstacleObj->getCollider()))) {
-        //m_RigidBody->UnsetForce();
-        oldPos.x -= 0.1;
-        m_Transform->SetPosition(oldPos); 
-    }
-
-    if (m_Collider) {
-        m_Collider->Update();
     }
 
     m_Origin->x = m_Transform->x + m_Width/2;
@@ -67,7 +50,7 @@ void Warrior::Clean() {
 Warrior::~Warrior() {
     if (m_Animation) delete m_Animation;
     if (m_RigidBody) delete m_RigidBody;
-    if (m_Collider) delete m_Collider;
+    // add free of Collider ?
     #ifdef DEBUG
     std::cout << "Warrior Destructor called !" << std::endl;
     #endif

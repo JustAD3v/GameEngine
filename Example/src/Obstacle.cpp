@@ -12,6 +12,7 @@ void Obstacle::Draw() {
 }
 
 void Obstacle::Update(float dt) {
+    (void)dt;
     if (m_Collider) {
         m_Collider->Update();
     }

@@ -49,7 +49,8 @@ void MyGame::OnUpdate(float dt) {
     m_LevelMap->Update();
     player->Update(dt);
     obstacle->Update(dt);
-    Camera::GetInstance()->Update(dt);
+    Camera::GetInstance()->Update();
+    m_Scene1->Update(dt);
     // if (player->getCollider()->isOverlapped(*(obstacle->getCollider()))) { //rethink usage of pointers/refs
     //     std::cout << "Player collides with box : " << (countCollide++) << std::endl;
     // } 

@@ -24,7 +24,6 @@ class Warrior: public Character{
         // int m_Row, m_Frame, m_FrameCount;
         // int m_AnimSpeed;
         Animation* m_Animation;
-        RigidBody* m_RigidBody;
         bool m_HasFlipped;
 };
 
