@@ -13,6 +13,8 @@ all: $(OUT)
 $(OUT): $(OBJ) ../build/libEngine.a
 	@if not exist build mkdir build
 	$(CC) $(OBJ) -o $(OUT) $(LDFLAGS) $(INFOFLAGS)
+	copy /Y ..\SDL3\lib\SDL3.dll build
+	copy /Y ..\SDL3_image\lib\SDL3_image.dll build
 
 build/obj/%.o: %.cpp ../include/IGame.h ../include/Engine.h 
 	@if not exist build\obj\src mkdir build\obj\src
