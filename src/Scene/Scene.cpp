@@ -7,13 +7,13 @@ void Scene::AddObject(std::string ObjectID, GameObject* obj) {
     if (obj->getCollider() != nullptr && obj->getCollider()->isSolid()) {
         m_CollidingObjects.push_back(obj);
     }
-    Character* obj_to_char = dynamic_cast<Character*>(obj); //tries to cast obj to Character* type
-    if (obj_to_char) {
-        // if success then it really was a Character*, so add it to the dynamic objects 
+    if (obj->m_RigidBody) {
+        // if object has a RigidBody then add it to the dynamic objects 
         m_DynamicObjects.push_back(obj);
     }
 }
 
+//Refactor since GameObject class befriends Scene class
 void Scene::RemoveObject(std::string ObjectID) {
     auto it = m_ObjectsMap.find(ObjectID);
     if (it != m_ObjectsMap.end()) { //object found
@@ -47,6 +47,15 @@ std::ostream& operator<<(std::ostream& os, const Scene& s) {
         std::cout << "   " << *(*it);
     }
     return os; 
+}
+
+void Scene::Update() {
+    for (auto it = m_DynamicObjects.begin(); it != m_DynamicObjects.end(); ++it) {
+        GameObject* curr_go = (*it);
+        Vector2D old_pos = curr_go->m_Transform->GetPosition();
+        curr_go->m_Transform->TranslateX(curr_go->m_RigidBody->GetPosition().x);
+        //m_Transform->Translate(m_RigidBody->GetPosition());
+    }
 }
 
 void Scene::Clean() { //destroys gameObjects so you can't reuse them in other scenes

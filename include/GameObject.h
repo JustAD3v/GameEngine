@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "GameObjectCollider.h"
 #include "BoxCollider.h"
+#include "RigidBody.h"
 
 //#include <SDL3_image/SDL_image.h>
 #include <SDL3/SDL.h>
@@ -60,6 +61,7 @@ class GameObject : public IObject {
         inline Scene* setScene(Scene *scene_ptr) {m_Scene = scene_ptr;}
 
         inline friend std::ostream& operator<<(std::ostream& os, const GameObject& go) {os << "GameObject with textureID : " << go.m_TextureID << std::endl;}
+        friend class Scene;
 
         virtual void Draw() = 0;
         virtual void Update(float dt) = 0;
@@ -68,6 +70,7 @@ class GameObject : public IObject {
         protected:
             Vector2D* m_Origin; //represent the center of the GameObject
             Transform* m_Transform;
+            RigidBody* m_RigidBody = nullptr;
             GameObjectCollider* m_Collider = nullptr;
             int m_Width, m_Height;
             std::string m_TextureID;

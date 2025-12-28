@@ -67,6 +67,7 @@ void Warrior::Clean() {
 Warrior::~Warrior() {
     if (m_Animation) delete m_Animation;
     if (m_RigidBody) delete m_RigidBody;
+    if (m_Collider) delete m_Collider;
     #ifdef DEBUG
     std::cout << "Warrior Destructor called !" << std::endl;
     #endif

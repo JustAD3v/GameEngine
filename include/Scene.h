@@ -14,7 +14,11 @@ class Scene {
         void AddObject(std::string ObjectID, GameObject* obj);
         GameObject *getObjectById(std::string ObjectId);
         void RemoveObject(std::string ObjectID);
+        
+        void Update();
         void Clean();
+        
+        
         friend std::ostream& operator<<(std::ostream& os, const Scene& s);
 
     private:
